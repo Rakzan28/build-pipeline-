@@ -1,0 +1,31 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Product_Name': ['Phone', 'Laptop', 'Tablet', 'Watch', 'Camera'],
+    'Customer_Rating': [4.5, 4.8, None, 4.2, 4.7]
+}
+
+df = pd.DataFrame(data)
+
+# Remove missing ratings
+df = df.dropna()
+
+print(df)
+
+# Average rating
+print("\nAverage Rating:")
+print(df['Customer_Rating'].mean())
+
+# Top 3 products
+top3 = df.sort_values(by='Customer_Rating', ascending=False).head(3)
+
+print("\nTop 3 Products:")
+print(top3)
+
+# Bar chart
+plt.bar(df['Product_Name'], df['Customer_Rating'])
+plt.title("Product Ratings")
+plt.xlabel("Product")
+plt.ylabel("Rating")
+plt.show()

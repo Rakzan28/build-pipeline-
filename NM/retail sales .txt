@@ -1,0 +1,29 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Product': ['Laptop', 'Mouse', 'Laptop', 'Keyboard'],
+    'Quantity': [2, 5, 3, 4],
+    'Price': [50000, 500, None, 1500]
+}
+
+df = pd.DataFrame(data)
+
+# Fill missing price with average
+df['Price'].fillna(df['Price'].mean(), inplace=True)
+
+# Total sales
+df['Total_Sales'] = df['Quantity'] * df['Price']
+
+# Highest sales product
+print(df)
+
+print("\nHighest Total Sales Product:")
+print(df.loc[df['Total_Sales'].idxmax(), 'Product'])
+
+# Bar chart
+plt.bar(df['Product'], df['Total_Sales'])
+plt.title("Total Sales by Product")
+plt.xlabel("Product")
+plt.ylabel("Sales")
+plt.show()

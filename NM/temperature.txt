@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Date': ['2025-01-01', '2025-01-02', '2025-01-03'],
+    'Min_Temp': [22, None, 24],
+    'Max_Temp': [35, 36, None]
+}
+
+df = pd.DataFrame(data)
+
+# Fill missing values
+df['Min_Temp'].fillna(df['Min_Temp'].mean(), inplace=True)
+df['Max_Temp'].fillna(df['Max_Temp'].mean(), inplace=True)
+
+# Average temperature
+df['Average_Temp'] = (df['Min_Temp'] + df['Max_Temp']) / 2
+
+print(df)
+
+# Highest average temperature date
+print("\nHighest Average Temperature Date:")
+print(df.loc[df['Average_Temp'].idxmax(), 'Date'])
+
+# Line chart
+plt.plot(df['Date'], df['Average_Temp'], marker='o')
+plt.title("Average Temperature Trend")
+plt.xlabel("Date")
+plt.ylabel("Average Temperature")
+plt.show()

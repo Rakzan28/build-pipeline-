@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Date': ['2025-02-01', '2025-02-02', '2025-02-03'],
+    'Vehicle_Count': [1200, None, 1800]
+}
+
+df = pd.DataFrame(data)
+
+# Replace missing values with 0
+df['Vehicle_Count'].fillna(0, inplace=True)
+
+print(df)
+
+# Total and average
+print("\nTotal Vehicle Count:")
+print(df['Vehicle_Count'].sum())
+
+print("\nAverage Vehicle Count:")
+print(df['Vehicle_Count'].mean())
+
+# Highest traffic date
+print("\nHighest Traffic Date:")
+print(df.loc[df['Vehicle_Count'].idxmax(), 'Date'])
+
+# Line graph
+plt.plot(df['Date'], df['Vehicle_Count'], marker='o')
+plt.title("Traffic Volume Trend")
+plt.xlabel("Date")
+plt.ylabel("Vehicle Count")
+plt.show()
